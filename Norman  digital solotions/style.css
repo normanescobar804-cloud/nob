@@ -1,0 +1,196 @@
+/* Reiniciar estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f8fc;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background: #0d47a1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Menú */
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffcc00;
+}
+
+/* Sección principal */
+.inicio {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.imagen img, .hero-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(13,71,161,0.12);
+}
+
+/* Formulario de contacto */
+.contact {
+    background: #ffffff;
+    padding: 40px 20px;
+    text-align: left;
+}
+
+.contact h2{
+    color: #0d47a1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-form{
+    max-width: 700px;
+    margin: 0 auto;
+    display: grid;
+    gap: 12px;
+}
+
+.contact-form label{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d9e6;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.contact-form button{
+    width: 220px;
+    justify-self: center;
+    background: #0d47a1;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.form-status{
+    text-align: center;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+@media (max-width: 600px){
+    .contact-form{
+        padding: 0 8px;
+    }
+    .contact-form button{ width: 100%; }
+}
+
+/* WhatsApp floating button */
+.whatsapp-float{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    background:#25D366;
+    color:white;
+    padding:12px 16px;
+    border-radius:50px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.2);
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.whatsapp-float:hover{ filter:brightness(.95) }
+
+.inicio h2 {
+    font-size: 36px;
+    color: #0d47a1;
+}
+
+.inicio p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+/* Botón */
+button {
+    background: #0d47a1;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1565c0;
+}
+
+/* Pie de página */
+footer {
+    background: #0d47a1;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 50px;
+}/* Servicios */
+.servicios{
+    padding:60px 20px;
+    background:white;
+    text-align:center;
+}
+
+.contenedor-servicios{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.tarjeta{
+    width:300px;
+    background:#ffffff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.tarjeta:hover{
+    transform:translateY(-10px);
+}
+
+.tarjeta h3{
+    color:#0d47a1;
+    margin-bottom:15px;
+}

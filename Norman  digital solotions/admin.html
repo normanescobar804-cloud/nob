@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Norman Digital Solutions</title>
+  <style>
+    body{font-family:Arial, sans-serif;margin:20px}
+    .login, .panel{max-width:900px;margin:0 auto}
+    .requests{margin-top:20px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border:1px solid #ddd}
+    .status-new{color:blue}
+    .status-resolved{color:green}
+  </style>
+</head>
+<body>
+  <h1>Panel de administración</h1>
+
+  <div class="login">
+    <h3>Iniciar sesión</h3>
+    <form id="loginForm">
+      <input placeholder="Usuario" id="adminUser" required>
+      <input placeholder="Contraseña" id="adminPass" type="password" required>
+      <button type="submit">Entrar</button>
+    </form>
+    <p id="loginStatus"></p>
+  </div>
+
+  <div class="panel" style="display:none">
+    <h3>Solicitudes</h3>
+    <div class="requests">
+      <table id="requestsTable"><thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Asunto</th><th>Mensaje</th><th>Estado</th><th>Acciones</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginStatus = document.getElementById('loginStatus');
+    const panel = document.querySelector('.panel');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('adminUser').value;
+      const password = document.getElementById('adminPass').value;
+      const res = await fetch('/api/admin/login', {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({username,password})
+      });
+      const data = await res.json();
+      if (data.ok) { loginStatus.textContent='Autenticado'; panel.style.display='block'; loginForm.style.display='none'; loadRequests(); }
+      else loginStatus.textContent = data.error || 'Error';
+    });
+
+    async function loadRequests(){
+      const res = await fetch('/api/admin/requests');
+      if (res.status===401){ loginStatus.textContent='No autorizado'; return; }
+      const data = await res.json();
+      const tbody = document.querySelector('#requestsTable tbody');
+      tbody.innerHTML = '';
+      data.requests.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${r.id}</td><td>${r.name}</td><td>${r.email}</td><td>${r.subject||''}</td><td>${r.message}</td><td class="status-${r.status}">${r.status}</td><td><button onclick="update(${r.id},'resolved')">Marcar resuelta</button></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function update(id,status){
+      await fetch(`/api/admin/requests/${id}/status`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({status})});
+      loadRequests();
+    }
+  </script>
+</body>
+</html>
